@@ -1,0 +1,77 @@
+{
+  "corpus_id": "fia-f1-2026-engine-subset-v1",
+  "source_sha256": "cf0b919eef5eecc27497fb6de012f8d27e200f6dbd34d62b7e5385f7274ff652",
+  "records_sha256": "88d98baebb1ca03eb504708a9b63bed785b182ad7dd164aa346c1e38284be069",
+  "packages": {
+    "langchain-core": "1.6.12",
+    "langchain-text-splitters": "1.1.3"
+  },
+  "input_documents": 5,
+  "length_unit": "Python Unicode characters measured by len; not tokens or bytes",
+  "offset_basis": "Normalized parent article text; end offsets are exclusive",
+  "separators": [
+    "\n\n",
+    "\n",
+    ". ",
+    " ",
+    ""
+  ],
+  "strategies": {
+    "article": {
+      "config": null,
+      "chunks_file": "article.jsonl",
+      "chunks_sha256": "1d0aef9d96716ce22bf40c916c6775427170aac483df169ee2b06a1c78930eda",
+      "chunk_count": 5,
+      "max_chunk_characters": 511,
+      "chunks_per_article": {
+        "C5.1.1": 1,
+        "C5.1.2": 1,
+        "C5.1.3": 1,
+        "C5.1.4": 1,
+        "C5.1.18": 1
+      }
+    },
+    "recursive_180_40": {
+      "config": {
+        "chunk_size": 180,
+        "chunk_overlap": 40
+      },
+      "chunks_file": "recursive_180_40.jsonl",
+      "chunks_sha256": "2b8fcb31d14051bc91eef6349a59b3ee6594596e2fc62286df4fe572933544b7",
+      "chunk_count": 8,
+      "max_chunk_characters": 180,
+      "chunks_per_article": {
+        "C5.1.1": 1,
+        "C5.1.2": 1,
+        "C5.1.3": 1,
+        "C5.1.4": 4,
+        "C5.1.18": 1
+      }
+    },
+    "recursive_100_20": {
+      "config": {
+        "chunk_size": 100,
+        "chunk_overlap": 20
+      },
+      "chunks_file": "recursive_100_20.jsonl",
+      "chunks_sha256": "37c409f47a63f11be5523e6b061629d476fe505d218a07f626c6a553cafa157e",
+      "chunk_count": 15,
+      "max_chunk_characters": 99,
+      "chunks_per_article": {
+        "C5.1.1": 1,
+        "C5.1.2": 1,
+        "C5.1.3": 3,
+        "C5.1.4": 8,
+        "C5.1.18": 2
+      }
+    }
+  },
+  "checks": [
+    "corpus and text fingerprints",
+    "metadata preservation",
+    "exact source offsets",
+    "non-whitespace source coverage",
+    "recursive size bounds"
+  ],
+  "scope": "Mechanical chunk inspection only; no retrieval or answer-quality evaluation"
+}

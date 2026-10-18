@@ -6,7 +6,7 @@ A gradual, practical learning project for Retrieval-Augmented Generation (RAG), 
 
 ## Current status
 
-This project currently contains a small versioned corpus, preparation code, evaluation candidates, and a documented learning process. Retrieval, embeddings, vector storage, and answer generation are not implemented. No model-training or system-performance results are claimed.
+This project currently contains a small versioned corpus, preparation code, a first local LangChain document-and-chunking exercise, evaluation candidates, and a documented learning process. Retrieval, embeddings, vector storage, and answer generation are not implemented. No model-training or answer-quality results are claimed.
 
 The corpus contains five articles from Section C, Issue 20, dated 5 August 2026: C5.1.1-C5.1.4 and C5.1.18. Each record preserves source provenance, page locators, text fingerprints, and unresolved cross-references.
 
@@ -20,6 +20,8 @@ The corpus contains five articles from Section C, Issue 20, dated 5 August 2026:
 | [Reference candidates](outputs/reference-candidates.md) | Draft answers, source anchors, and review criteria; not an accepted gold set. |
 | [Process log](outputs/process-log.md) | Decisions, revisions, and the LLM-assisted evaluation-data method. |
 | [Preparation utility](scripts/prepare_corpus.py) | Download, verify, and reproduce the small source corpus. |
+| [First LangChain exercise](outputs/langchain-chunking/README.md) | Document metadata, three chunking strategies, and an observed context-separation risk. |
+| [Chunking example](examples/01_langchain_chunking.py) | Runnable local exercise using LangChain Core and text splitters. |
 
 ## Reproduce corpus preparation
 
@@ -48,7 +50,7 @@ The original PDF and temporary files are excluded from Git. A changed source dow
 6. **Generation with sources:** answer from retrieved evidence and handle missing information.
 7. **Evaluation:** measure retrieval, answer correctness, source support, and update behavior.
 
-LangChain, vector databases, and AWS remain later learning options; none is a selected architecture yet. The next exercise is to inspect fragmentation choices and contextual dependencies using the existing article records.
+LangChain Core and text splitters are now used for the first chunking exercise. See its [setup and results](outputs/langchain-chunking/README.md). Vector storage, model providers, and AWS remain later choices; LangGraph and hosted tracing are not configured. The next step is a simple retrieval baseline, starting with whole articles for this small corpus and inspecting evidence coverage.
 
 ## Working conventions
 
