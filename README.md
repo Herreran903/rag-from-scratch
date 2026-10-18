@@ -6,7 +6,7 @@ A gradual, practical learning project for Retrieval-Augmented Generation (RAG), 
 
 ## Current status
 
-This project currently contains a small versioned corpus, preparation code, a first local LangChain document-and-chunking exercise, evaluation candidates, and a documented learning process. Retrieval, embeddings, vector storage, and answer generation are not implemented. No model-training or answer-quality results are claimed.
+This project currently contains a small versioned corpus, preparation code, a local LangChain document-and-chunking exercise, an Ollama generation smoke test with explicitly supplied evidence, evaluation candidates, and a documented learning process. Automatic retrieval, embeddings, and vector storage are not implemented. No model-training results or general answer-quality benchmark are claimed.
 
 The corpus contains five articles from Section C, Issue 20, dated 5 August 2026: C5.1.1-C5.1.4 and C5.1.18. Each record preserves source provenance, page locators, text fingerprints, and unresolved cross-references.
 
@@ -22,6 +22,7 @@ The corpus contains five articles from Section C, Issue 20, dated 5 August 2026:
 | [Preparation utility](scripts/prepare_corpus.py) | Download, verify, and reproduce the small source corpus. |
 | [First LangChain exercise](outputs/langchain-chunking/README.md) | Document metadata, three chunking strategies, and an observed context-separation risk. |
 | [Chunking example](examples/01_langchain_chunking.py) | Runnable local exercise using LangChain Core and text splitters. |
+| [Local Ollama test](outputs/ollama-smoke-test/README.md) | Two generation cases using an existing local model and supplied evidence. |
 
 ## Reproduce corpus preparation
 
@@ -50,7 +51,7 @@ The original PDF and temporary files are excluded from Git. A changed source dow
 6. **Generation with sources:** answer from retrieved evidence and handle missing information.
 7. **Evaluation:** measure retrieval, answer correctness, source support, and update behavior.
 
-LangChain Core and text splitters are now used for the first chunking exercise. See its [setup and results](outputs/langchain-chunking/README.md). Vector storage, model providers, and AWS remain later choices; LangGraph and hosted tracing are not configured. The next step is a simple retrieval baseline, starting with whole articles for this small corpus and inspecting evidence coverage.
+LangChain Core and text splitters are used for the first chunking exercise; its prompt abstraction is reused in the [local Ollama test](outputs/ollama-smoke-test/README.md). Ollama is a working local generation option. Vector storage, other model providers, and AWS remain later choices; LangGraph and hosted tracing are not configured. The next step is a simple retrieval baseline, starting with whole articles for this small corpus, before connecting automatic evidence selection to generation.
 
 ## Working conventions
 

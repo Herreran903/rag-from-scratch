@@ -202,3 +202,15 @@ The run produced 5, 8, and 15 chunks respectively. All source/text fingerprint, 
 Saved results and a concise ecosystem guide in [the chunking exercise](langchain-chunking/README.md). LangGraph, hosted observability, vector storage, embeddings, and generation remain future steps. Whole articles are the proposed initial retrieval baseline for this tiny corpus; this is a scoped engineering choice rather than a universal chunk-size recommendation.
 
 Repeated the example in a separate scratch output directory with socket connections disabled. All three chunk JSONL files and the summary matched the first run byte-for-byte. This confirms that the exercised document/splitting path ran locally without external connections. No learner quiz or additional domain-validation claim was introduced.
+
+## 2026-10-18 — Existing local Ollama model smoke test
+
+The learner proposed using their existing local Ollama installation for experiments. The assistant checked the local CLI, installed-model endpoint, and running-model endpoint. Ollama 0.40.6 was available locally with no model loaded at inspection time. Selected the already-installed `qwen2.5:14b` completion model, approximately 9 GB on disk with Q4_K_M quantization, for a bounded generation exercise. The full installed-model inventory and personal machine paths were not added to project outputs.
+
+Added `examples/02_ollama_grounded_generation.py`, reusing LangChain Core's `ChatPromptTemplate` and the standard-library HTTP client. It accepts only an already-listed local model, rejects cloud model markers, and calls the fixed loopback `/api/chat` endpoint. It never pulls weights. Both requests supply all five source articles explicitly, so this is a generation smoke test, not an automatic retrieval pipeline.
+
+Ran Q002 and Q006 with temperature 0, seed 42, context setting 2048, generation budget 192, and a structured-output schema. Q002 preserved the displacement and asymmetric tolerance and cited C5.1.2. Q006 reported insufficient evidence in the provided subset, with no citations or numerical limit. Both responses completed normally and passed structural checks; the assistant inspected their content against the intended cases. No independent human validation, accepted-gold-set result, or general reliability score is claimed.
+
+Wall times were 45.354 seconds for the first call and 0.728 seconds for the second. The first included approximately 25.1 seconds of model loading, so these are smoke-run observations rather than comparable latency benchmarks. Saved prompts, schema, generation settings, exact model digest, source fingerprints, versions, and outputs in [the Ollama smoke-test artifacts](ollama-smoke-test/README.md).
+
+No new Python dependencies, model downloads, hosted tracing, or paid API calls were introduced. The existing models remain managed by Ollama; the requests set a one-minute keep-alive rather than changing global service configuration. Automatic retrieval remains the next pipeline step.
