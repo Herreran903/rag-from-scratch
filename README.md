@@ -1,40 +1,60 @@
-# RAG from Scratch
+# RAG from Scratch: FIA F1 Technical Regulations
 
-An independent learning project for understanding Retrieval-Augmented Generation (RAG) from first principles, one small step at a time.
+A gradual, practical learning project for Retrieval-Augmented Generation (RAG), using the **2026 FIA Formula 1 Technical Regulations**. The initial topic is engine specifications; power-unit requirements and aerodynamics are possible extensions.
 
-## Current scope
+**Working question:** How can a RAG assistant retrieve the relevant requirements, definitions, conditions, and exceptions from the correct regulation edition and answer with verifiable sources?
 
-Define the scope and learning approach before implementing a RAG system. No dependencies will be installed, models downloaded, or paid APIs called at this stage. Implementation choices will be agreed on together.
+## Current status
 
-The selected domain is the **FIA 2026 Formula 1 Technical Regulations**, connecting this project with the learner's previous exchange-program work. Start with engine specifications, then consider wider power-unit requirements and aerodynamics.
+This project currently contains a small versioned corpus, preparation code, evaluation candidates, and a documented learning process. Retrieval, embeddings, vector storage, and answer generation are not implemented. No model-training or system-performance results are claimed.
 
-Working question: **How can a RAG assistant retrieve the relevant technical requirements, definitions, conditions, and exceptions from the correct regulation edition and answer with verifiable sources?**
+The corpus contains five articles from Section C, Issue 20, dated 5 August 2026: C5.1.1-C5.1.4 and C5.1.18. Each record preserves source provenance, page locators, text fingerprints, and unresolved cross-references.
 
-This directory is the project root. This project is independent of the Whisper project at `C:\Users\herre\OneDrive\Documentos\simulst-from-scratch`.
+## Start here
+
+| Material | Purpose |
+|---|---|
+| [Corpus guide](outputs/corpus/README.md) | Files, record fields, preparation checks, and limitations. |
+| [Source manifest](outputs/corpus/manifest.json) | Edition, source URL, dates, extraction method, and checksums. |
+| [Article records](outputs/corpus/articles.jsonl) | Five source units, one JSON record per line. |
+| [Reference candidates](outputs/reference-candidates.md) | Draft answers, source anchors, and review criteria; not an accepted gold set. |
+| [Process log](outputs/process-log.md) | Decisions, revisions, and the LLM-assisted evaluation-data method. |
+| [Preparation utility](scripts/prepare_corpus.py) | Download, verify, and reproduce the small source corpus. |
+
+## Reproduce corpus preparation
+
+The recorded preparation environment used Python 3.12 and `pypdf==6.10.0`, listed in [requirements.txt](requirements.txt). Make that dependency available in your chosen environment before running the utility. The utility does not install packages.
+
+```bash
+# Verify the checked-in JSONL and manifest without downloading the PDF.
+python scripts/prepare_corpus.py --check
+
+# Download the official PDF if missing, verify its checksum, and rebuild records.
+python scripts/prepare_corpus.py --download
+
+# Rebuild from a source PDF that is already stored locally.
+python scripts/prepare_corpus.py
+```
+
+The original PDF and temporary files are excluded from Git. A changed source download is rejected if it does not match the pinned fingerprint. Extraction does not replace visual or domain review; regenerated outputs do not claim a new human review.
 
 ## Gradual learning path
 
-1. **Documents:** Choose a small collection and understand how to read and preserve its text and metadata.
-2. **Chunking:** Split documents into useful passages while retaining source references.
-3. **Search:** Build intuition with simple keyword search and inspect its limitations.
-4. **Embeddings:** Understand vector representations and similarity before selecting any model.
-5. **Retrieval:** Select relevant passages and examine retrieval quality.
-6. **Generation with sources:** Use retrieved context to answer questions with traceable citations and acknowledge missing evidence.
-7. **Evaluation:** Create a small question set and assess retrieval, answer accuracy, and source support.
+1. **Documents:** preserve source text, structure, metadata, and versions.
+2. **Chunking:** compare article boundaries and smaller passages while retaining context.
+3. **Search:** establish a simple keyword baseline and inspect failures.
+4. **Embeddings:** understand vector representations and similarity.
+5. **Retrieval:** compare evidence selection, filters, and vector storage.
+6. **Generation with sources:** answer from retrieved evidence and handle missing information.
+7. **Evaluation:** measure retrieval, answer correctness, source support, and update behavior.
+
+LangChain, vector databases, and AWS remain later learning options; none is a selected architecture yet. The next exercise is to inspect fragmentation choices and contextual dependencies using the existing article records.
 
 ## Working conventions
 
-- Use English for files, code names, and commands.
-- Explain each step in Spanish before implementing it.
-- Agree on scope before adding implementation or dependencies.
-- Use `work/` for scratch files and `outputs/` for deliverables.
+- Use English for files, code names, and commands; discuss learning steps in Spanish.
+- Explain each step before implementation and progress through small practical artifacts.
+- Keep scratch files in the ignored `work/` directory and inspectable learning artifacts in `outputs/`.
+- Track evaluation-data curation separately from implementation. LLM-generated candidates require verification; they are not automatically ground truth.
 
-## Next step
-
-Inspect the prepared [minimal corpus](outputs/corpus/README.md): an official PDF snapshot, source manifest, and five article records with provenance. Next, discuss retrieval fragmentation and contextual dependencies using these records before implementing basic search. Learn through practical construction and analysis, rather than question-by-question oral exercises.
-
-The [draft reference answers](outputs/reference-candidates.md) remain development candidates with incomplete human review. Treat dataset curation as a separate workstream. Local corpus preparation is complete; retrieval, embeddings, and generation remain unimplemented. No dependencies have been installed.
-
-## Process documentation
-
-See the [process log](outputs/process-log.md) for scope decisions, source provenance, the LLM-assisted evaluation-data method, candidate questions, and pending verification. The candidates are not yet a validated gold set.
+This is an independent educational project. FIA and Formula 1 source materials retain their respective rights; this project is not affiliated with or endorsed by either organisation. See the [source note](outputs/corpus/sources/README.md).

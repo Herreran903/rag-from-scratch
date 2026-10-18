@@ -11,7 +11,7 @@ At this stage, the work consists of discussion, source inspection through web br
 ### How the scope was selected
 
 1. Prepared this chat directory as the project root and created the initial README.
-2. Reviewed earlier planning in `D:\CV\portafolio-ia`. That planning proposed an evaluated support assistant on AWS, followed by optional agent extensions. It was background rather than a fixed architecture for this project.
+2. Reviewed earlier portfolio planning. That planning proposed an evaluated support assistant on AWS, followed by optional agent extensions. It was background rather than a fixed architecture for this project.
 3. Discussed research on evidence retrieval, conversational ambiguity, unanswerable questions, conflicting sources, temporal relevance, and evaluation.
 4. Expanded the discussion to document fragmentation, revisions, incremental indexing, stale chunks, update visibility, and embedding-model migrations.
 5. The learner proposed FIA documentation to connect the project with previous Formula 1 work during an exchange program, then clarified that the work concerned the 2026 technical regulations.
@@ -176,3 +176,15 @@ Used the PDF skill and the existing bundled Python/pypdf and Poppler rendering t
 Saved the one-off preparation utility at `work/prepare_corpus.py` and extraction/rendering intermediates at `work/pdf-review/`. Verified five records, distinct identifiers, valid JSON, the source fingerprint, and the per-record text fingerprints. The manifest also records the JSONL checksum and extractor version. This establishes byte-level traceability and extraction checks, not independent domain validation or broad source completeness.
 
 No new dependencies, model downloads, paid API calls, embeddings, vector store, retrieval index, or generation system were added. Evaluation candidate acceptance is unchanged. The next step is to inspect fragmentation choices and contextual dependencies using the prepared source records.
+
+## 2026-10-18 — Public repository preparation
+
+The learner requested a public GitHub repository. On resuming publication work, the assistant found an existing initial commit on `main` in a private `Herreran903/rag-from-scratch` repository. The public-visibility request remains the publication instruction.
+
+Prepared a public-facing README, removed machine-specific personal paths from the documentation, added ignore rules for temporary files and credentials, and promoted the preparation utility to `scripts/prepare_corpus.py`. The public utility supports read-only integrity checking, optional checksum-pinned source download, and an isolated output directory. It does not depend on the original chat's scratch files and does not install packages or call models.
+
+Recorded `pypdf==6.10.0` in `requirements.txt` without installing it. Added explicit LF rules for text artifacts so corpus byte fingerprints remain stable across checkouts. The local PDF is retained; the current tracked tree excludes it. The initial private commit already contained that snapshot, which remains in history because this preparation does not rewrite published commits. The source note identifies its official origin and third-party rights.
+
+The publication scope is the learning project, preparation utility, source records, evaluation candidates, and process documentation. Temporary rendering files and other local work are excluded. Retrieval and generation implementation remain future steps.
+
+Publication validation passed: read-only corpus integrity checking in the working directory and in an isolated export of the staged tree without the PDF; local reconstruction reproduced all five JSONL records byte-for-byte; a fresh official download in an isolated directory matched the pinned fingerprint and produced the same records. The staged diff passed whitespace checks. No packages were installed for these checks. The publication target is the public `main` branch of [Herreran903/rag-from-scratch](https://github.com/Herreran903/rag-from-scratch).

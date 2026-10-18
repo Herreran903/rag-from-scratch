@@ -38,7 +38,7 @@
     "normalization": "Expand ff/fi/fl/ffi/ffl ligatures and collapse whitespace; preserve other characters",
     "article_heading_handling": "C5.1.18 heading is separated from body; text_raw retains it",
     "page_numbering": "pdf_page is one-based; printed_page is the visible footer label",
-    "utility": "../../work/prepare_corpus.py",
+    "utility": "../../scripts/prepare_corpus.py",
     "boundary_method": "Explicit article starts and next-article endpoints, not every inline cross-reference",
     "pdf_warnings": "pypdf reported recoverable object-offset warnings; the PDF was not modified"
   },

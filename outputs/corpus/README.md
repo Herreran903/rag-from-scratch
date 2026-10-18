@@ -6,7 +6,7 @@ Prepared on 2026-10-17. This is the first local data-preparation artifact for th
 
 | File | Purpose |
 |---|---|
-| [Original PDF](sources/fia-f1-2026-section-c-issue-20.pdf) | Unmodified snapshot downloaded from the official FIA source. |
+| [Original PDF source](https://www.fia.com/system/files/documents/fia_2026_f1_regulations_-_section_c_technical_-_iss_20_-_2026-08-05.pdf) | Unmodified local snapshot; excluded from Git. See the [download note](sources/README.md). |
 | [manifest.json](manifest.json) | Source URL, retrieval time, edition dates, checksums, extraction method, and corpus boundaries. |
 | [articles.jsonl](articles.jsonl) | Five article records; each line is an independent JSON object. |
 
@@ -40,7 +40,7 @@ A checksum detects byte differences; it does not establish factual correctness, 
 5. Rendered the relevant pages with the existing bundled Poppler tool and visually compared all selected article text with pages C61-C62.
 6. Reopened the JSONL, checked five distinct record IDs, and verified source and text checksums.
 
-The one-off preparation utility is saved in the project's `work/` directory as `prepare_corpus.py`. It is preparation code, not an implemented RAG pipeline. No dependencies were installed and no model was called.
+The initial one-off preparation utility was saved in `work/`. Its public, reproducible version is now [scripts/prepare_corpus.py](../../scripts/prepare_corpus.py), with optional source download and integrity checks. It is preparation code, not an implemented RAG pipeline. No dependencies were installed and no model was called during this project's preparation.
 
 ## Limitations and next step
 
